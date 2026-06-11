@@ -35,15 +35,15 @@ public class GroupAction extends AbstractSelectedAction {
 
     @Override
     protected void updateEnabledState() {
-        if (getView() != null) {
-            setEnabled(canGroup());
-        } else {
-            setEnabled(false);
-        }
+        setEnabled(canGroup(getView()));
     }
 
     protected boolean canGroup() {
-        return getView() != null && getView().getSelectionCount() > 1;
+        return canGroup(getView());
+    }
+
+    protected boolean canGroup(DrawingView v) {
+        return v != null && v.getSelectionCount() > 1;
     }
 
     @Override

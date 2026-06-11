@@ -39,18 +39,18 @@ public class UngroupAction extends AbstractSelectedAction {
 
     @Override
     protected void updateEnabledState() {
-        if (getView() != null) {
-            setEnabled(canUngroup());
-        } else {
-            setEnabled(false);
-        }
+        setEnabled(canUngroup(getView()));
     }
 
     protected boolean canUngroup() {
-        return getView() != null
-                && getView().getSelectionCount() == 1
+        return canUngroup(getView());
+    }
+
+    protected boolean canUngroup(DrawingView v) {
+        return v != null
+                && v.getSelectionCount() == 1
                 && prototype != null
-                && getView().getSelectedFigures().iterator().next().getClass().equals(
+                && v.getSelectedFigures().iterator().next().getClass().equals(
                         prototype.getClass());
     }
 
